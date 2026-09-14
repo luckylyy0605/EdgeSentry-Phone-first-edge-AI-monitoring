@@ -1,5 +1,8 @@
 """schema 行为契约测试:校验规则与双端解析一致性。"""
 
+import json
+from pathlib import Path
+
 import pytest
 from pydantic import ValidationError
 
@@ -16,6 +19,8 @@ from app.schemas import (
     SessionConfig,
     SessionState,
 )
+
+EXAMPLES_DIR = Path(__file__).resolve().parents[2] / "configs" / "schema-examples"
 
 BASE_RESULT = {
     "protocol_version": PROTOCOL_VERSION,
@@ -129,3 +134,27 @@ class TestSessionStateEnum:
         assert {s.value for s in SessionState} == {
             "disconnected", "pairing", "ready", "streaming", "stopping", "degraded", "failed",
         }
+
+
+class TestSchemaExamples:
+    """configs/schema-examples 的样例必须可被后端 schema 解析。"""
+
+    def _load(self, name: str) -> dict:
+        return json.loads((EXAMPLES_DIR / name).read_text(encoding="utf-8"))
+
+    def test_stream_configure_example(self) -> None:
+        msg = self._load("stream.configure.json")
+        assert SessionConfig.model_validate(msg["video"] | {"audio": msg["audio"], "models": msg["models"]})
+
+    def test_inference_result_example(self) -> None:
+        msg = self._load("inference.result.json")
+        result = InferenceResult.model_validate(msg)
+        assert result.detections[0].bbox_norm == (0.15, 0.12, 0.48, 0.92)
+
+    def test_error_example(self) -> None:
+        msg = self._load("error.json")
+        assert ErrorInfo.model_validate(msg["error"]).code == ErrorCode.RATE_LIMIT
+
+    def test_device_status_example(self) -> None:
+        msg = self._load("device.status.json")
+        assert DeviceStatus.model_validate(msg["status"]).models["detector"] == ModelHealth.READY

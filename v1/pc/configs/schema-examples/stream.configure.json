@@ -1,0 +1,8 @@
+{
+  "protocol_version": 1,
+  "type": "stream.configure",
+  "session_id": "01J_ARBITRARY_EXAMPLE",
+  "video": { "width": 640, "height": 360, "fps": 3, "format": "jpeg" },
+  "audio": { "sample_rate": 16000, "channels": 1, "format": "pcm_s16le" },
+  "models": ["detector"]
+}

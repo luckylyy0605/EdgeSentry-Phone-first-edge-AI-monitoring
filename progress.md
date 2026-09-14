@@ -1,5 +1,22 @@
 # 开发进度
 
+## 2026-09-14：单元 1.1 工程骨架与协议 schema
+
+- 本轮只处理单元 1.1,未提前实现后续单元。
+- 建立 Mobile_Monitor 独立 git 仓库(main 分支),远程指向 `EdgeSentry-Phone-first-edge-AI-monitoring`。
+- 环境适配:Node.js 因 MSI 安装失败(注册表已登记但文件未落盘,Error 1730 需管理员),改用便携版 v24.19.0 于 `D:\software\node-v24.19.0-win-x64`,未改系统 PATH。
+- 新增后端 `v1/pc/backend/`:FastAPI + `GET /healthz`;Pydantic schema 覆盖 session/inference/error/device;bbox 强制 0–1 归一化,协议版本与帧率范围显式校验。
+- 新增前端 `v1/pc/frontend/`:Vite + React + TypeScript strict 骨架,PWA manifest,`src/protocol/types.ts` 与后端 schema 逐字段对应。
+- 新增 `v1/pc/configs/schema-examples/`:4 个双端契约样例,由后端测试保证可解析。
+- Git 记录:按用户要求,commit message 不加 Co-Authored-By;已两次按用户指示执行 commit(项目文档、后端、历史改写去署名)。
+
+## 验证记录
+
+- `python -m pytest tests/ -v`(backend):22 passed。
+- `npm run build`(frontend,含 tsc --noEmit):31 modules transformed,built in 372ms,类型检查 0 错误。
+- 未验证项:手机实机访问、uvicorn 实际启动、WSL 内 git push(用户自行完成,成功)。
+- 环境遗留:Windows 侧 git push 需复制 WSL 的 `id_ed25519_github_v2` 公钥到 GitHub 账号或本地 ssh config;系统注册表残留 Node.js 假安装记录,不影响本项目。
+
 ## 2026-09-14：方案设计启动
 
 - 已创建独立项目目录 `Mobile_Monitor/`。

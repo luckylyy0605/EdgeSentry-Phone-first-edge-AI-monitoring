@@ -1,0 +1,22 @@
+{
+  "protocol_version": 1,
+  "type": "inference.result",
+  "session_id": "01J_ARBITRARY_EXAMPLE",
+  "seq": 184,
+  "capture_ts_ms": 1789372800123,
+  "server_ts_ms": 1789372800218,
+  "infer_ms": 63.4,
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "bbox_norm": [0.15, 0.12, 0.48, 0.92],
+      "confidence": 0.91,
+      "track_id": 2
+    }
+  ],
+  "fight": { "prob": 0.18, "active": false },
+  "audio_events": [],
+  "faces": [],
+  "stats": { "queue_depth": 0, "dropped_frames": 7 }
+}

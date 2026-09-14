@@ -1,0 +1,10 @@
+{
+  "protocol_version": 1,
+  "type": "error",
+  "error": {
+    "code": 4,
+    "message": "frame rate exceeded",
+    "session_id": "01J_ARBITRARY_EXAMPLE",
+    "detail": { "limit_fps": 15, "observed_fps": 22 }
+  }
+}
