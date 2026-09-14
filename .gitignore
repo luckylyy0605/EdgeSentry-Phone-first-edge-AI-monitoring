@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Frontend
+node_modules/
+dist/
+playwright-report/
+test-results/
+
+# Secrets and device identity
+.env
+.env.*
+!.env.example
+certs/
+*.key
+*.pem
+*.p12
+
+# Runtime data and large assets
+output/
+models/
+*.rknn
+*.onnx
+*.pt
+*.pth
+*.gguf
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.pcm
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
